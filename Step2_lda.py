@@ -7,7 +7,7 @@ import numpy as np
 ##################### STEP 1 DATA PREPROCESSING ########################
 
 ### read csv file, with each line represents each sample
-f = open('textinput.txt')
+f = open('2_rank2word.csv')
 csv_f = csv.reader(f, delimiter=",")
 
 # Create doc_set, total set for document
@@ -55,7 +55,7 @@ for knum in [3]:    #number of topics, append more number for iteratively train 
 	outdocprob  = 'k'+str(knum)+'topicProb.txt'    #filename for document probability
     
 	### Training LDA model
-	print("Training lda: topic number %d ..." % knum)
+	print("Training lda with number of topic = %d ..." % knum)
 	ldamodel = gensim.models.ldamodel.LdaModel(corpus = corpus, num_topics=knum, id2word = dictionary, passes=10)
     
     
@@ -67,14 +67,15 @@ for knum in [3]:    #number of topics, append more number for iteratively train 
 	termtopic = pd.DataFrame(data, index=index, columns=columns)
     
 	# fill in the termtopic and save to file
+	print("loading word probability into file " + outtermprob + "...")
 	for i in range(knum):
-		print("loading word probability into file " + outtermprob + "...")
+		print("topic " + i + "...")		
 		t = 1
-		for item in ldamodel.get_topic_terms(i, topn=num_unique_token):  #return list of (word-id, probability) tuples
-			termtopic.loc[ t, (i*2)+1] = dictionary[item[0]]              #retrieve word from dictionary based on word-id
-			termtopic.loc[ t, (i*2)+2] = item[1]                          #write word possibility at another file
+		for item in ldamodel.get_topic_terms(i, topn=num_unique_token):	#return list of (word-id, probability) tuples
+			termtopic.loc[ t, (i*2)+1] = dictionary[item[0]]        #retrieve word from dictionary based on word-id
+			termtopic.loc[ t, (i*2)+2] = item[1]                    #write word possibility at another file
 			t += 1
-	termtopic.to_csv(outtermprob, index=False)
+	termtopic.to_csv(outtermprob, index=False)				#output: probability of term in each topic
             
     
 	### Output document (topic probability)
@@ -89,6 +90,6 @@ for knum in [3]:    #number of topics, append more number for iteratively train 
 	for i in range(num_documents):
 		for ind, prob in ldamodel.get_document_topics(corpus[i]):
 			doctopic[ind+1][i+1] = prob
-	doctopic.to_csv(outdocprob, index=False)
+	doctopic.to_csv(outdocprob, index=False)				#output: probability of sample in each topic
 
 

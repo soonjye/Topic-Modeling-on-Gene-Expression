@@ -9,11 +9,11 @@ topicProbfile <- paste('2_k', k, 'topicProb.txt', sep='')    # input
 doctopicf <- as.matrix(read.table(file = topicProbfile, sep=',', header=T, fill=TRUE))
 dim(doctopicf)   #fill=TRUE for filling blank value; number of column depends on first row
 
-
 normaltopic <- doctopicf[1:num_normal,]
 cancertopic <- doctopicf[(num_normal+1):(num_normal+num_tumor),]
 (normalmean <- colMeans(normaltopic))
 (cancermean <- colMeans(cancertopic))
+
 
 
 ###### generate bar plot of grouped samples (normal vs tumor)
@@ -22,10 +22,12 @@ barplot(normalmean, ylim=c(0,1), main='Normal Sample', xlab="Topic", ylab='Proba
 barplot(cancermean, ylim=c(0,1), main='Cancer Sample', xlab="Topic", ylab='Probability', names.arg=paste('Topic', 1:k))
 
 
+
 ###### generate heatmap
 heatmap(doctopicf, col=heat.colors(75, alpha=1), RowSideColors=c(rep('blue', num_normal), rep('red', num_tumor)), labCol=paste('Topic', 1:k))
 
- 
+
+
 ###### generate bar plot of invididual samples
 cols <- c('blue',"red")
 posstat <- rep(T, num_normal+num_tumor)

@@ -1,4 +1,3 @@
-# examine the difference between topics of grouped normal vs grouped tumor samples
 k        <- 3
 num_bins <- 5
 topicPrffile   <- '3_topicPrf.csv'         # input

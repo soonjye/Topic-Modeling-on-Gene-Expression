@@ -7,6 +7,7 @@ topicProbfile <- paste('2_k', k, 'topicProb.txt', sep='')   # input
 topicPrffile  <- '3_topicPrf.csv'                         # output
 
 
+
 ######## impute bin of each gene in each topic (AKA topic profile)
 termProb     <- as.matrix(read.table(file = termProbfile, sep=',', header=T))
 dim(termProb)   #fill=TRUE for filling blank value; number of column depends on first row

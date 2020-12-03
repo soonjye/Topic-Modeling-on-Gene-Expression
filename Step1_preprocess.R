@@ -3,12 +3,12 @@ num_normal  <- 49    # Number of normal samples: breast = 112, lung = 49
 num_tumor   <- 49    # Number of tumor samples:  breast = 117, lung = 49
 num_bins    <- 5     # number of bins
 outputfile1 <- "1_exp2rank.csv"
-outputfile2 <- "2_rank2word.csv"
+outputfile2 <- "1_rank2word.csv"
 
 
 
 ################## Read data files
-fpkmdata <- read.table(file=inputfile, sep=',', row.names=1)
+fpkmdata <- read.table(file=inputfile, sep=',', header=T, row.names=1)
 ## Change inputfile to BreastCancer or LungCancer
 
 (totalsample <- dim(fpkmdata)[2])

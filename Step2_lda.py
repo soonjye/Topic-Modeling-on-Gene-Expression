@@ -7,7 +7,7 @@ import numpy as np
 ##################### STEP 1 DATA PREPROCESSING ########################
 
 ### read csv file, with each line represents each sample
-f = open('2_rank2word.csv')
+f = open('1_rank2word.csv')
 csv_f = csv.reader(f, delimiter=",")
 
 # Create doc_set, total set for document
@@ -51,8 +51,8 @@ for knum in [3]:    #number of topics, append more number for iteratively train 
 	tfidf = models.TfidfModel(corpus)
 	corpus_tfidf = tfidf[corpus]
 
-	outtermprob = 'k'+str(knum)+'termprob.txt'     #filename for term probability
-	outdocprob  = 'k'+str(knum)+'topicProb.txt'    #filename for document probability
+	outtermprob = '2_k'+str(knum)+'termProb.txt'     #filename for term probability
+	outdocprob  = '2_k'+str(knum)+'topicProb.txt'    #filename for document probability
     
 	### Training LDA model
 	print("Training lda with number of topic = %d ..." % knum)

@@ -2,11 +2,12 @@ num_normal <- 49  # Number of normal samples: breast = 112, lung = 49
 num_tumor  <- 49  # Number of tumor samples:  breast = 117, lung = 49
 num_bins   <- 5   # number of bins
 k          <- 3   # number of topic
+topicProbfile <- paste('2_k', k, 'topicProb.txt', sep='')    # input
 
 
-doctopicf <- as.matrix(read.table(file = paste('k', k, 'topicProb.txt', sep=''), sep=',', header=T, fill=TRUE))
+###### read input file
+doctopicf <- as.matrix(read.table(file = topicProbfile, sep=',', header=T, fill=TRUE))
 dim(doctopicf)   #fill=TRUE for filling blank value; number of column depends on first row
-doctopic <- matrix(0, ncol=3, nrow=229)
 
 
 normaltopic <- doctopicf[1:num_normal,]
